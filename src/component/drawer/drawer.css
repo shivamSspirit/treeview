@@ -1,0 +1,22 @@
+.drawer {
+    height: 40px;
+    width: 100%;
+    display: flex;
+}
+
+.drawer-block {
+    padding-left: 1rem;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+}
+
+.drawer-item{
+    cursor: pointer;
+}
+
+.active-drawer {
+    border-bottom: 2px solid red;
+}
+

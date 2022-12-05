@@ -1,0 +1,70 @@
+.header {
+    width: 100%;
+    background-color: aliceblue;
+}
+
+.header-block {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-content: center;
+}
+
+.upper-icon {
+    height: 40px;
+    width: 40px;
+    margin-top: 1em;
+}
+
+.hamburgur{
+    cursor: pointer;
+}
+
+.search-box {
+    position: relative;
+}
+
+.search-input {
+    width: 300px;
+    height: 40px;
+    position: relative;
+    outline: none;
+    border: none;
+    margin-top: .7rem;
+}
+
+.search-icon {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 1.4rem;
+    left: 0.3rem;
+}
+
+.invite-block {
+    display: flex;
+    flex-direction: row;
+    margin-left: 9rem;
+}
+
+.invite-text {
+    margin-top: 1.6rem;
+}
+
+.profile-icon {
+    background-color: black;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    color: white;
+    display: flex;
+    margin-top: .3rem;
+}
+
+.profile-name {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}

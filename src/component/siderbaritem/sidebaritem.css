@@ -1,0 +1,51 @@
+.siderbar-item {
+    color: black;
+    padding: 0em;
+}
+
+.title-block {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: .7em;
+}
+
+.siderbar-item-icon {
+    width: 16px;
+    height: 16px;
+    margin-top: .2rem;
+    cursor: pointer;
+    transition: transform .3s;
+}
+
+.siderbar-item-icon.open {
+    transform: rotate(90deg);
+}
+
+.action-item {
+    display: flex;
+    flex-direction: row;
+    gap: .3rem;
+}
+
+.sidebar-content {
+    padding: 0.2em;
+    height: 0;
+    overflow: hidden;
+}
+
+.siderbar-item .sidebar-content.open{
+    height: auto;
+    overflow: visible;
+}
+
+.title-name{
+    cursor: pointer;
+}
+
+.title-active{
+    border-left: 1px solid red ;
+}
+.title-name:hover{
+    background-color: aqua;
+}

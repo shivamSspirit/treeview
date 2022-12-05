@@ -1,0 +1,31 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.main {
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar {
+    height: calc(100% - 50px);
+    overflow: auto;
+    width: 260px;
+    flex-shrink: 0;
+    background-color: aliceblue;
+}
+
+.upper-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+.icon-plus{
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
