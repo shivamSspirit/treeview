@@ -113,7 +113,8 @@ const AppContextProvider = (props) => {
         drawerstate,
         setDrawerState,
         setCurrentlyOpen,
-        setCollectionItem
+        setCollectionItem,
+        currentlyopen
     }
 
 

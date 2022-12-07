@@ -1,20 +1,18 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 import { Context } from '../../treeviewContext'
 import ReactTooltip from 'react-tooltip'
 import './sidebaritem.css'
 
 function SiderbarItem({ item }) {
-    const [toggle, setToggle] = useState(false);
     const context = useContext(Context)
-    const { onADDleaf, onRemoveCollection, setCurrentlyOpen, collectionItem, setCollectionItem } = context
+    const { onADDleaf, onRemoveCollection, setCurrentlyOpen, currentlyopen } = context
 
     const opentoggle = (id) => {
-        setCurrentlyOpen(id)
-        setToggle(!toggle)
+        setCurrentlyOpen(id);
     }
 
-    const addleaf = (id,...rest) => {
-        onADDleaf(id,...rest)
+    const addleaf = (id, ...rest) => {
+        onADDleaf(id, ...rest)
     }
 
     const removeCollection = (id) => {
@@ -28,7 +26,7 @@ function SiderbarItem({ item }) {
                     <div className='sidebar-title'>
                         <span className='title-block'>
                             <span>
-                                <img onClick={() => opentoggle(item.id)} className={`siderbar-item-icon ${toggle ? "open" : ''}`} src='/morethan.png' alt='more-icon' />
+                                <img onClick={() => opentoggle(item.id)} className={`siderbar-item-icon ${item?.id === currentlyopen ? "open" : ''}`} src='/morethan.png' alt='more-icon' />
                             </span>
                             <span>
                                 {item.title}
@@ -41,7 +39,7 @@ function SiderbarItem({ item }) {
                         </span>
                     </div>
 
-                    <div className={`sidebar-content ${toggle ? "open" : ''}`}>
+                    <div className={`sidebar-content ${item?.id === currentlyopen ? "open" : ''}`}>
                         {item.children.map((childitem, id) => {
 
                             if (!childitem.iscontainernode) {
@@ -59,14 +57,14 @@ function SiderbarItem({ item }) {
                                     <div key={id} className='sidebar-title'>
                                         <span className='title-block'>
                                             <span>
-                                                <img onClick={() => opentoggle(childitem.id)} className={`siderbar-item-icon ${toggle ? "open" : ''}`} src='/morethan.png' alt='more-icon' />
+                                                <img onClick={() => opentoggle(childitem.id)} className={`siderbar-item-icon ${childitem?.id === currentlyopen ? "open" : ''}`} src='/morethan.png' alt='more-icon' />
                                             </span>
                                             <span>
                                                 {childitem.title}
                                             </span>
                                             <span className='action-item'>
                                                 <ReactTooltip />
-                                                <img data-tip="add leaf" onClick={() => addleaf(childitem.id,item?.children?.find(item=>item?.iscontainernode))} className='siderbar-item-icon' src='/plus.png' alt='plus-icon' />
+                                                <img data-tip="add leaf" onClick={() => addleaf(childitem.id, item?.children?.find(item => item?.iscontainernode))} className='siderbar-item-icon' src='/plus.png' alt='plus-icon' />
                                                 <img data-tip="remove collection" onClick={() => removeCollection(childitem.id)} className='siderbar-item-icon' src='/dots.png' alt='dot-icon' />
                                             </span>
                                         </span>
