@@ -13,8 +13,8 @@ function SiderbarItem({ item }) {
         setToggle(!toggle)
     }
 
-    const addleaf = (id) => {
-        onADDleaf(id)
+    const addleaf = (id,...rest) => {
+        onADDleaf(id,...rest)
     }
 
     const removeCollection = (id) => {
@@ -66,39 +66,13 @@ function SiderbarItem({ item }) {
                                             </span>
                                             <span className='action-item'>
                                                 <ReactTooltip />
-                                                <img data-tip="add leaf" onClick={() => addleaf(childitem.id)} className='siderbar-item-icon' src='/plus.png' alt='plus-icon' />
+                                                <img data-tip="add leaf" onClick={() => addleaf(childitem.id,item?.children?.find(item=>item?.iscontainernode))} className='siderbar-item-icon' src='/plus.png' alt='plus-icon' />
                                                 <img data-tip="remove collection" onClick={() => removeCollection(childitem.id)} className='siderbar-item-icon' src='/dots.png' alt='dot-icon' />
                                             </span>
                                         </span>
                                     </div>
                                 )
                             }
-                            // childitem.iscontainernode ?((
-                            //     <div key={id} className='sidebar-title'>
-                            //         <span className='title-block'>
-                            //             <span className='title-name'>
-                            //                 {childitem.title}
-                            //             </span>
-                            //         </span>
-                            //     </div>
-                            // )) : (<div key={id} className='sidebar-title'>
-                            //     <span className='title-block'>
-                            //         <span>
-                            //             <img onClick={() => opentoggle(childitem.id)} className={`siderbar-item-icon ${toggle ? "open" : ''}`} src='/morethan.png' alt='more-icon' />
-                            //         </span>
-                            //         <span>
-                            //             {childitem.title}
-                            //         </span>
-                            //         <span className='action-item'>
-                            //             <ReactTooltip />
-                            //             <img data-tip="add leaf" onClick={() => addleaf(childitem.id)} className='siderbar-item-icon' src='/plus.png' alt='plus-icon' />
-                            //             <img data-tip="remove collection" onClick={() => removeCollection(childitem.id)} className='siderbar-item-icon' src='/dots.png' alt='dot-icon' />
-                            //         </span>
-                            //     </span>
-                            // </div>)
-
-
-
                         }
                         )}
                     </div>
