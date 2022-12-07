@@ -4,43 +4,54 @@ export const Context = React.createContext("AppContext");
 const AppContextProvider = (props) => {
     const [collectionItem, setCollectionItem] = useState([
         {
-            id: 0,
+            id: 1,
             title: 'containernode',
+            iscontainernode:true,
             children: [
                 {
-                    id: 1,
-                    title: 'childnode1'
+                    id: 8,
+                    title: 'childnode1',
+                    iscontainernode:false
                 },
                 {
                     id: 2,
-                    title: 'childnode2'
+                    title: 'childnode2',
+                    iscontainernode:false
                 }
             ]
         },
         {
             id: 3,
-            title: 'leafnode'
+            title: 'leafnode',
+            iscontainernode:false
         },
 
         {
             id: 4,
             title: 'container',
+            iscontainernode:true,
             children: [
                 {
                     id: 5,
-                    title: 'childnode1'
+                    title: 'childnode1',
+                    iscontainernode:false,
                 },
                 {
                     id: 6,
-                    title: 'childnode2'
+                    title: 'childnode2',
+                    iscontainernode:false,
                 }
             ]
 
         }
-    ])
+    ]);
+
+    console.log("collectionItem",collectionItem)
 
     const [drawerToggle, setDrawerToggle] = useState(false);
     const [drawerstate, setDrawerState] = useState('tree');
+    const [currentlyopen, setCurrentlyOpen] = useState();
+
 
     useEffect(() => {
         localStorage.setItem("treeData", JSON.stringify(collectionItem))
@@ -60,8 +71,8 @@ const AppContextProvider = (props) => {
 
     const onADDleaf = (id) => {
         const updateCollection = collectionItem.find(item => item.id === id);
-        const newleafID = generateId(updateCollection.children)
-        const updatedcollection = [...updateCollection.children, { id: newleafID, title: 'new leaf node' }]
+        const newleafID = generateId(updateCollection?.children)
+        const updatedcollection = [...updateCollection?.children, { id: newleafID, title: 'new leaf node',iscontainernode:false }]
         setCollectionItem(collectionItem.map(leafs => {
             if (leafs.id === id) {
                 return { ...leafs, children: updatedcollection };
@@ -78,8 +89,21 @@ const AppContextProvider = (props) => {
     }
 
     const onAddCollection = () => {
-        const newcollectionId = generateId(collectionItem);
-        setCollectionItem([...collectionItem, { id: newcollectionId, title: 'new collection', children: [] }])
+        if (currentlyopen) {
+            const updateCollection = collectionItem.find(item => item.id === currentlyopen);
+            const newContainerId = generateId(updateCollection.children);
+            const updatedcollection = [...updateCollection.children, { id: newContainerId, title: 'new container node', children: [],iscontainernode:true }];
+            setCollectionItem(collectionItem.map(containernode => {
+                if (containernode.id === currentlyopen) {
+                    return { ...containernode, children: updatedcollection };
+                } else {
+                    return containernode;
+                }
+            }));
+        } else {
+            const newcollectionId = generateId(collectionItem);
+            setCollectionItem([...collectionItem, { id: newcollectionId, title: 'new collection', children: [],iscontainernode:true }])
+        }
     }
 
 
@@ -91,7 +115,9 @@ const AppContextProvider = (props) => {
         drawerToggle,
         setDrawerToggle,
         drawerstate,
-        setDrawerState
+        setDrawerState,
+        setCurrentlyOpen,
+        setCollectionItem
     }
 
 

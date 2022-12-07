@@ -9,7 +9,7 @@ function SideBar() {
     const { collectionItem, onAddCollection, drawerstate } = context;
 
     const addnewCollection = () => {
-        onAddCollection()
+        onAddCollection();
     }
 
     const ReturnTabs = () => {
