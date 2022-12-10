@@ -9,35 +9,36 @@ const AppContextProvider = (props) => {
             iscontainernode: true,
             children: [
                 {
-                    id: 8,
+                    id: 2,
                     title: 'childnode1',
                     iscontainernode: false
                 },
                 {
-                    id: 2,
+                    id: 3,
                     title: 'childnode2',
-                    iscontainernode: false
+                    iscontainernode: true,
+                    children: [
+                        {
+                            id: 4,
+                            title: "childnode3",
+                            iscontainernode: false,
+                        }
+                    ]
                 }
             ]
         },
         {
-            id: 3,
-            title: 'leafnode',
-            iscontainernode: false
-        },
-
-        {
-            id: 4,
+            id: 8,
             title: 'container',
             iscontainernode: true,
             children: [
                 {
-                    id: 5,
+                    id: 9,
                     title: 'childnode1',
                     iscontainernode: false,
                 },
                 {
-                    id: 6,
+                    id: 10,
                     title: 'childnode2',
                     iscontainernode: false,
                 }
@@ -65,17 +66,23 @@ const AppContextProvider = (props) => {
         return maxId + 1
     }
 
-    const onADDleaf = (id, ...rest) => {
-        const updateCollection = collectionItem.find(item => item.id === id);
-        const newleafID = generateId(updateCollection?.children);
-        const updatedcollection = [...updateCollection?.children, { id: newleafID, title: 'new leaf node', iscontainernode: false }]
-        setCollectionItem(collectionItem.map(leafs => {
-            if (leafs.id === id) {
-                return { ...leafs, children: updatedcollection };
-            } else {
-                return leafs;
-            }
-        }));
+
+    const onADDleaf = (item) => {
+        let updatedCollection;
+        const newLeafId = generateId(item?.children);
+        if (item?.children?.length === 0) {
+            updatedCollection = item?.children?.concat([{ id: newLeafId, title: 'new leaf node', iscontainernode: false }])
+        } else {
+            updatedCollection = [...item?.children, { id: newLeafId, title: 'new leaf node', iscontainernode: false }]
+        }
+            setCollectionItem(collectionItem.map(collection => {
+                if (collection?.id === item?.id) {
+                    return { ...collection, children: updatedCollection };
+                }
+                else {
+                    return collection;
+                }
+            }))
     }
 
     const onRemoveCollection = (id) => {
